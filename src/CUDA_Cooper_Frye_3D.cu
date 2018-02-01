@@ -36,11 +36,11 @@ This is then copied back to the host and written to a file.
 
 __device__ void getbulkvisCoefficients(double Tdec, double* bulkvisCoefficients, double hbarC, int bulk_deltaf_kind)
 {
-   double Tdec_fm = Tdec/hbarC;  // [1/fm]
+   double Tdec_fm = Tdec / hbarC;  // [1/fm]
    double Tdec_fm_power[11];    // cache the polynomial power of Tdec_fm
    Tdec_fm_power[1] = Tdec_fm;
    for(int ipower = 2; ipower < 11; ipower++)
-       Tdec_fm_power[ipower] = Tdec_fm_power[ipower-1]*Tdec_fm;
+       Tdec_fm_power[ipower] = Tdec_fm_power[ipower-1] * Tdec_fm;
    /*if(bulk_deltaf_kind == 0)       // 14 moment expansion
    {
         // load from file
@@ -59,48 +59,48 @@ __device__ void getbulkvisCoefficients(double Tdec, double* bulkvisCoefficients,
        // A Polynomial fit to each coefficient -- X is the temperature in fm^-1
        // Both fits are reliable between T=100 -- 180 MeV , do not trust it beyond
        bulkvisCoefficients[0] = (  642096.624265727
-                                 - 8163329.49562861*Tdec_fm_power[1]
-                                 + 47162768.4292073*Tdec_fm_power[2]
-                                 - 162590040.002683*Tdec_fm_power[3]
-                                 + 369637951.096896*Tdec_fm_power[4]
-                                 - 578181331.809836*Tdec_fm_power[5]
-                                 + 629434830.225675*Tdec_fm_power[6]
-                                 - 470493661.096657*Tdec_fm_power[7]
-                                 + 230936465.421*Tdec_fm_power[8]
-                                 - 67175218.4629078*Tdec_fm_power[9]
-                                 + 8789472.32652964*Tdec_fm_power[10]);
+                                 - 8163329.49562861 * Tdec_fm_power[1]
+                                 + 47162768.4292073 * Tdec_fm_power[2]
+                                 - 162590040.002683 * Tdec_fm_power[3]
+                                 + 369637951.096896 * Tdec_fm_power[4]
+                                 - 578181331.809836 * Tdec_fm_power[5]
+                                 + 629434830.225675 * Tdec_fm_power[6]
+                                 - 470493661.096657 * Tdec_fm_power[7]
+                                 + 230936465.421 * Tdec_fm_power[8]
+                                 - 67175218.4629078 * Tdec_fm_power[9]
+                                 + 8789472.32652964 * Tdec_fm_power[10]);
 
        bulkvisCoefficients[1] = (  1.18171174036192
-                                 - 17.6740645873717*Tdec_fm_power[1]
-                                 + 136.298469057177*Tdec_fm_power[2]
-                                 - 635.999435106846*Tdec_fm_power[3]
-                                 + 1918.77100633321*Tdec_fm_power[4]
-                                 - 3836.32258307711*Tdec_fm_power[5]
-                                 + 5136.35746882372*Tdec_fm_power[6]
-                                 - 4566.22991441914*Tdec_fm_power[7]
-                                 + 2593.45375240886*Tdec_fm_power[8]
-                                 - 853.908199724349*Tdec_fm_power[9]
-                                 + 124.260460450113*Tdec_fm_power[10]);
+                                 - 17.6740645873717 * Tdec_fm_power[1]
+                                 + 136.298469057177 * Tdec_fm_power[2]
+                                 - 635.999435106846 * Tdec_fm_power[3]
+                                 + 1918.77100633321 * Tdec_fm_power[4]
+                                 - 3836.32258307711 * Tdec_fm_power[5]
+                                 + 5136.35746882372 * Tdec_fm_power[6]
+                                 - 4566.22991441914 * Tdec_fm_power[7]
+                                 + 2593.45375240886 * Tdec_fm_power[8]
+                                 - 853.908199724349 * Tdec_fm_power[9]
+                                 + 124.260460450113 * Tdec_fm_power[10]);
    }
    else if (bulk_deltaf_kind == 2)
    {
        // A Polynomial fit to each coefficient -- Tfm is the temperature in fm^-1
        // Both fits are reliable between T=100 -- 180 MeV , do not trust it beyond
        bulkvisCoefficients[0] = (
-               21091365.1182649 - 290482229.281782*Tdec_fm_power[1]
-             + 1800423055.01882*Tdec_fm_power[2] - 6608608560.99887*Tdec_fm_power[3]
-             + 15900800422.7138*Tdec_fm_power[4] - 26194517161.8205*Tdec_fm_power[5]
-             + 29912485360.2916*Tdec_fm_power[6] - 23375101221.2855*Tdec_fm_power[7]
-             + 11960898238.0134*Tdec_fm_power[8] - 3618358144.18576*Tdec_fm_power[9]
-             + 491369134.205902*Tdec_fm_power[10]);
+               21091365.1182649 - 290482229.281782 * Tdec_fm_power[1]
+             + 1800423055.01882 * Tdec_fm_power[2] - 6608608560.99887 * Tdec_fm_power[3]
+             + 15900800422.7138 * Tdec_fm_power[4] - 26194517161.8205 * Tdec_fm_power[5]
+             + 29912485360.2916 * Tdec_fm_power[6] - 23375101221.2855 * Tdec_fm_power[7]
+             + 11960898238.0134 * Tdec_fm_power[8] - 3618358144.18576 * Tdec_fm_power[9]
+             + 491369134.205902 * Tdec_fm_power[10]);
 
        bulkvisCoefficients[1] = (
-               4007863.29316896 - 55199395.3534188*Tdec_fm_power[1]
-             + 342115196.396492*Tdec_fm_power[2] - 1255681487.77798*Tdec_fm_power[3]
-             + 3021026280.08401*Tdec_fm_power[4] - 4976331606.85766*Tdec_fm_power[5]
-             + 5682163732.74188*Tdec_fm_power[6] - 4439937810.57449*Tdec_fm_power[7]
-             + 2271692965.05568*Tdec_fm_power[8] - 687164038.128814*Tdec_fm_power[9]
-             + 93308348.3137008*Tdec_fm_power[10]);
+               4007863.29316896 - 55199395.3534188 * Tdec_fm_power[1]
+             + 342115196.396492 * Tdec_fm_power[2] - 1255681487.77798 * Tdec_fm_power[3]
+             + 3021026280.08401 * Tdec_fm_power[4] - 4976331606.85766 * Tdec_fm_power[5]
+             + 5682163732.74188 * Tdec_fm_power[6] - 4439937810.57449 * Tdec_fm_power[7]
+             + 2271692965.05568 * Tdec_fm_power[8] - 687164038.128814 * Tdec_fm_power[9]
+             + 93308348.3137008 * Tdec_fm_power[10]);
    }
    else if (bulk_deltaf_kind == 3)
    {
@@ -159,11 +159,11 @@ __device__ void getbulkvisCoefficients(double Tdec, double* bulkvisCoefficients,
 __global__ void cooperFrye3D( long FO_length, int number_of_chosen_particles, int pT_tab_length, int phi_tab_length, int y_tab_length,
                               double* dN_pTdpTdphidy_d, double* pT_d, double* trig_d, double* y_d,
                               double* mass_d, double* sign_d, double* degen_d, int* baryon_d,
-                              double *Tdec, double *Pdec, double *Edec, double *mu, double *tau, double *eta,
-                              double *utau, double *ux, double *uy, double *ueta,
-                              double *datau, double *dax, double *day, double *daeta,
-                              double *pi00, double *pi01, double *pi02, double *pi11, double *pi12, double *pi22, double *pi33,
-                              double *muB, double *bulkPi,
+                              double *Tdec_d, double *Pdec_d, double *Edec_d, double *mu_d, double *tau_d, double *eta_d,
+                              double *utau_d, double *ux_d, double *uy_d, double *ueta_d,
+                              double *datau_d, double *dax_d, double *day_d, double *daeta_d,
+                              double *pi00_d, double *pi01_d, double *pi02_d, double *pi11_d, double *pi12_d, double *pi22_d, double *pi33_d,
+                              double *muB_d, double *bulkPi_d,
                               double hbarC, int bulk_deltaf_kind, int INCLUDE_DELTAF, int INCLUDE_BULKDELTAF, int F0_IS_NOT_SMALL)
 {
   //This array is a shared array that will contain the integration contributions from each cell.
@@ -183,7 +183,7 @@ __global__ void cooperFrye3D( long FO_length, int number_of_chosen_particles, in
   }
 	double deltaf_prefactor = 1.0/( 2.0 * Tdec_d[icell] * Tdec_d[icell] * (Edec_d[icell] + Pdec_d[icell]) );
 
-  for (long imm = 0; imm < number_of_chosen_particles * pT_tab_length * phi_tab_length * y_tab_length; imm++) //this index runs over all particle masses and momenta
+  for (long imm = 0; imm < number_of_chosen_particles * pT_tab_length * phi_tab_length * y_tab_length; imm++) //this index runs over all particle species and momenta
   {
     temp[icell] = 0.0;
     if (icell < FO_length) //this index corresponds to the freezeout cell
@@ -192,18 +192,18 @@ __global__ void cooperFrye3D( long FO_length, int number_of_chosen_particles, in
       int ipart       = imm / (pT_tab_length * phi_tab_length * y_tab_length);
       int iy          = (imm - (ipart * pT_tab_length * phi_tab_length * y_tab_length) ) / (pT_tab_length * phi_tab_length);
       int iphip       = (imm - (ipart * pT_tab_length * phi_tab_length * y_tab_length) - (iy * pT_tab_length * phi_tab_length) ) / pT_tab_length;
-      int ipT         = imm - ( (ipart * (pT_tab_length * phi_tab_length * y_tab_length)) + (iy * (pT_tab_length * phi_tab_length)) + (iphip * (pT_tab_length)) )
+      int ipT         = imm - ( (ipart * (pT_tab_length * phi_tab_length * y_tab_length)) + (iy * (pT_tab_length * phi_tab_length)) + (iphip * (pT_tab_length)) );
       double px       = pT_d[ipT] * trig_d[ipT + phi_tab_length];
       double py       = pT_d[ipT] * trig_d[ipT];
       double mT       = sqrt(mass_d[ipart] * mass_d[ipart] + pT_d[ipT] * pT_d[ipT]);
       double y        = y_d[iy];
-      double ptau     = mT * cosh(y - eta[icell]); //contravariant
-      double peta     = (-1.0 / tau[icell]) * mT * sinh(y - eta[icell]); //contravariant
+      double ptau     = mT * cosh(y - eta_d[icell]); //contravariant
+      double peta     = (-1.0 / tau_d[icell]) * mT * sinh(y - eta[icell]); //contravariant
 
       double pdotu = ptau * utau[icell] - px * ux[icell] - py * uy[icell] - (tau[icell] * tau[icell]) * peta * ueta[icell]; //watch factors of tau from metric! is ueta read in as contravariant?
-      double expon = (pdotu - mu[icell] - baryon * muB[icell]) / Tdec[icell];
+      double expon = (pdotu - mu_d[icell] - baryon_d[ipart] * muB_d[icell]) / Tdec_d[icell];
       //thermal equilibrium distributions
-      double f0 = 1./(exp(expon) + sign);
+      double f0 = 1./(exp(expon) + sign_d[ipart]);
       double pdotdsigma = ptau * datau[icell] + px * dax[icell] + py * day[icell] + peta * daeta[icell]; //are these dax, day etc. the covariant components?
 
       //corrections to distribution function from shear stress
@@ -211,61 +211,61 @@ __global__ void cooperFrye3D( long FO_length, int number_of_chosen_particles, in
       if (INCLUDE_DELTAF)
       {
         double Wfactor = (ptau * ptau * pi00[icell] - 2.0 * ptau * px * pi01[icell] - 2.0 * ptau * py * pi02[icell] + px * px * pi11[icell] + 2.0 * px * py * pi12[icell] + py * py * pi22[icell] + peta * peta *pi33[icell]);
-        delta_f_shear = ((1 - F0_IS_NOT_SMALL*sign*f0) * Wfactor * deltaf_prefactor);
+        delta_f_shear = ((1 - F0_IS_NOT_SMALL * sign_d[ipart] * f0) * Wfactor * deltaf_prefactor);
       }
 
       //corrections to distribution function from bulk pressure
       double delta_f_bulk = 0.0;
       if (INCLUDE_BULKDELTAF == 1)
       {
-        if (bulk_deltaf_kind == 0) delta_f_bulk = (- (1. - F0_IS_NOT_SMALL * sign * f0) * bulkPi[icell] * (bulkvisCoefficients[0] * mass * mass + bulkvisCoefficients[1] * pdotu + bulkvisCoefficients[2] * pdotu * pdotu));
+        if (bulk_deltaf_kind == 0) delta_f_bulk = (- (1. - F0_IS_NOT_SMALL * sign_d[ipart] * f0) * bulkPi_d[icell] * (bulkvisCoefficients[0] * mass_d[ipart] * mass_d[ipart] + bulkvisCoefficients[1] * pdotu + bulkvisCoefficients[2] * pdotu * pdotu));
         else if (bulk_deltaf_kind == 1)
         {
-          double E_over_T = pdotu / Tdec[icell];
-          double mass_over_T = mass / Tdec[icell];
-          delta_f_bulk = (-1.0 * (1. - sign * f0)/E_over_T * bulkvisCoefficients[0] * (mass_over_T * mass_over_T/3. - bulkvisCoefficients[1] * E_over_T * E_over_T) * bulkPi[icell]);
+          double E_over_T = pdotu / Tdec_d[icell];
+          double mass_over_T = mass_d[ipart] / Tdec_d[icell];
+          delta_f_bulk = (-1.0 * (1. - sign_d[ipart] * f0)/E_over_T * bulkvisCoefficients[0] * (mass_over_T * mass_over_T / 3. - bulkvisCoefficients[1] * E_over_T * E_over_T) * bulkPi_d[icell]);
         }
         else if (bulk_deltaf_kind == 2)
         {
-          double E_over_T = pdotu / Tdec[icell];
-          delta_f_bulk = (-1.*(1.-sign * f0) * (-bulkvisCoefficients[0] + bulkvisCoefficients[1] * E_over_T) * bulkPi[icell]);
+          double E_over_T = pdotu / Tdec_d[icell];
+          delta_f_bulk = (-1. * (1. - sign_d[ipart] * f0) * (-bulkvisCoefficients[0] + bulkvisCoefficients[1] * E_over_T) * bulkPi_d[icell]);
         }
         else if (bulk_deltaf_kind == 3)
         {
-          double E_over_T = pdotu / Tdec[icell];
-          delta_f_bulk = (-1.0*(1.-sign * f0) / sqrt(E_over_T) * (-bulkvisCoefficients[0] + bulkvisCoefficients[1] * E_over_T) * bulkPi[icell]);
+          double E_over_T = pdotu / Tdec_d[icell];
+          delta_f_bulk = (-1.0 * (1. - sign_d[ipart] * f0) / sqrt(E_over_T) * (-bulkvisCoefficients[0] + bulkvisCoefficients[1] * E_over_T) * bulkPi_d[icell]);
         }
         else if (bulk_deltaf_kind == 4)
         {
-          double E_over_T = pdotu / Tdec[icell];
-          delta_f_bulk = (-1.0*(1.-sign * f0) * (bulkvisCoefficients[0] - bulkvisCoefficients[1] / E_over_T) * bulkPi[icell]);
+          double E_over_T = pdotu / Tdec_d[icell];
+          delta_f_bulk = (-1.0 * (1. - sign_d[ipart] * f0) * (bulkvisCoefficients[0] - bulkvisCoefficients[1] / E_over_T) * bulkPi_d[icell]);
         }
       }
 
       double ratio = min(1., fabs(1. / (delta_f_shear + delta_f_bulk)));
+      double result = prefactor * degen_d[ipart] * pdotdsigma * tau_d[icell] * f0 * (1. + (delta_f_shear + delta_f_bulk) * ratio);
+      temp[icell] += result;
 
-      temp[localIdx] += result[k];
-
-    }//finish if(idx<FO_length)
+    }//finish if(icell < FO_length)
     int N = blockDim.x;
     __syncthreads(); //Make sure threads are prepared for reduction
     do
     {
       //Here N must be a power of two. Try reducing by powers of 2, 4, 6 etc...
       N /= 2;
-      if (localIdx < N) temp[localIdx] += temp[localIdx + N];
+      if (icell < N) temp[icell] += temp[icell + N];
       __syncthreads();//Test if this is needed
     } while(N != 1);
 
-    int spectra_size = number_of_chosen_particles*pT_tab_length*phi_tab_length;
-    if (localIdx == 0) dN_pTdpTdphidy_d[blockIdx.x * spectra_size + imm] = temp[0];
+    long spectra_size = number_of_chosen_particles * pT_tab_length * phi_tab_length * y_tab_length;
+    if (icell == 0) dN_pTdpTdphidy_d[blockIdx.x * spectra_size + imm] = temp[0];
 	}
 }
 
 //Does a block sum, where the previous kernel did a thread sum.
 __global__ void reduction(double* dN_pTdpTdphidy_d, int final_spectrum_size, int cooperfryeblocks)
 {
-  int idx = threadIdx.x + blockDim.x*blockIdx.x;
+  int idx = threadIdx.x + blockDim.x * blockIdx.x;
   if (idx < final_spectrum_size)
   {
     if (cooperfryeblocks == 1) return; //Probably will never happen, but best to be careful
